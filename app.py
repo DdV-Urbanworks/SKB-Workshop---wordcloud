@@ -13,7 +13,7 @@ st.set_page_config(
 
 ### INDATA
 
-df = pd.read_excel('data.xlsx', sheet_name='Blad1')
+df = pd.read_csv('data.csv')
 
 worddict = dict(zip(df['word'], df['weight']))
 colordict = dict(zip(df['word'], df['color']))
@@ -92,7 +92,6 @@ with col[1]:
     st.write("")  
     st.write("")  
 
-
     # Setup logo
     image = Image.open('Urban Works_logga_svart_300 dpi.png')
     st.image(image, width=200)
@@ -110,45 +109,32 @@ for word in sorted(st.session_state.word_data.keys()):
         key=f"weight_slider_{word}"
     )
 
+### VISUALISERA ORDMOLNET
+# --- Display Word Cloud ---
+
+def color_func(word, font_size, position, orientation, font_path, random_state=None):
+    opacity = st.session_state.opacity_map.get(word, 3)
+
+    color_map = {
+        1: '#D9D9D6',
+        2: '#E3ECF0',
+        3: '#BED9E7',
+        4: '#69A5C0',
+        5: '#004D73'
+    }
+
+    return color_map.get(opacity, '#D9D9D6')
+
+
 with col[0]:
 
     st.markdown('# Övning 1: VAD')
 
-    ### TÖM ORDMOLNET
-    # --- Reset ---
-    if st.button("Börja om med en ny wordcloud"):
-        st.session_state.word_data = worddict
-        st.session_state.opacity_map = colordict
-
-
-    ### VISUALISERA ORDMOLNET
-    # --- Display Word Cloud ---
-    if st.session_state.word_data:
-
-        # Frequencies - Definiera frequencies utifrån word_data
-        frequencies = {
-        word: weight
-        for word, weight in st.session_state.word_data.items()
-        }
-
     if st.session_state.word_data:
         frequencies = st.session_state.word_data
 
-        def color_func(word, font_size, position, orientation, font_path, random_state=None):
-            opacity = st.session_state.opacity_map.get(word, 3)
-
-            color_map = {
-                1: '#D9D9D6',
-                2: '#E3ECF0',
-                3: '#BED9E7',
-                4: '#69A5C0',
-                5: '#004D73'
-            }
-
-            return color_map.get(opacity, '#D9D9D6')
-        
-
         mask = np.array(Image.open('mask.png'))
+
         wc = WordCloud(
             scale=2,
             mask=mask,
@@ -156,7 +142,7 @@ with col[0]:
             width=1280,
             height=720,
             background_color="white",
-            prefer_horizontal=0.5,
+            prefer_horizontal=1.0,
         ).generate_from_frequencies(frequencies)
 
         wc = wc.recolor(color_func=color_func)
@@ -166,12 +152,5 @@ with col[0]:
         ax.axis("off")
         st.pyplot(fig)
 
-
-
-        
-
-        
-
-    #st.json(frequencies, expanded=True)
     
 
