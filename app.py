@@ -1,6 +1,8 @@
 import streamlit as st
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+from matplotlib.font_manager import FontProperties
 import pandas as pd
 from PIL import Image
 import numpy as np
@@ -68,19 +70,25 @@ with col[1]:
 
 
     if st.session_state.get("awaiting_opacity", False):
-        st.subheader(f"Hur högt uppskattar du priset?")
-        opacity = st.slider("(1 = lågt, 3=högt, 5 = Väldigt högt)", 1, 5, 3)
-        if st.button("Submit Opacity"):
-            st.session_state.opacity_map[st.session_state.new_word] = opacity
+        with st.form(key="opacity_form"):
+            header = "Hur högt uppskattar du priset?"
+            opacity = st.slider(header, 1, 5, 3)
+            submitted_opacity = st.form_submit_button("Spara")
 
-            # If new word, assign default weight
-            if st.session_state.new_word not in st.session_state.word_data:
-                st.session_state.word_data[st.session_state.new_word] = 1
+            if submitted_opacity:
+                st.session_state.opacity_map[st.session_state.new_word] = opacity
 
-            # Clear temp state
-            del st.session_state["awaiting_opacity"]
-            del st.session_state["new_word"]
-            st.rerun()
+                # If new word, assign default weight
+                if st.session_state.new_word not in st.session_state.word_data:
+                    st.session_state.word_data[st.session_state.new_word] = 1
+
+                # Clear temp state
+                del st.session_state["awaiting_opacity"]
+                del st.session_state["new_word"]
+                st.rerun()
+
+            
+
 
     # Beskrivning
     with st.expander('Beskrivning', expanded=False):
@@ -99,7 +107,52 @@ with col[1]:
     image1 = Image.open('SKB - logga.png')
     st.image(image1, width=200)
 
-st.sidebar.header("Hur viktig är dessa faktorer för en bra produkt?")
+        # Define your levels and colors
+    colors = {
+        'Lågt': '#f0f0f0',
+        'Rimligt': '#E3ECF0',
+        'Dyrt': '#BED9E7',
+        'Väldigt dyrt': '#69A5C0',
+        'Prisdrivande': '#004D73'
+    }
+
+    # Create font properties
+    label_font = FontProperties(family='sans-serif', size=12, weight='normal')
+    title_font = FontProperties(family='sans-serif', size=14, weight='bold')
+
+    # Create a list of legend patches
+    legend_patches = [
+        mpatches.Patch(color=color, label=level)
+        for level, color in colors.items()
+    ]
+
+    # Create a figure and add the legend
+    fig, ax = plt.subplots()
+    ax.axis('off')  # Hide axes
+
+    # Add the legend in the center of the figure
+    legend = ax.legend(
+        handles=legend_patches,
+        loc='lower left',
+        frameon=False,
+        title='Teckenförklaring - Pris',
+        prop=label_font,
+        title_fontproperties=title_font
+    )
+
+    
+    # Change text color of labels
+    for text in legend.get_texts():
+        text.set_color('#7d7d7d')
+
+    # Change title color
+    legend.get_title().set_color('#7d7d7d')
+
+    # Display in Streamlit
+    st.pyplot(fig)
+
+
+st.sidebar.header("Hur viktiga är dessa faktorer för en bra produkt?")
 for word in sorted(st.session_state.word_data.keys()):
     st.session_state.word_data[word] = st.sidebar.slider(
         label=word,
@@ -109,6 +162,8 @@ for word in sorted(st.session_state.word_data.keys()):
         key=f"weight_slider_{word}"
     )
 
+    
+
 ### VISUALISERA ORDMOLNET
 # --- Display Word Cloud ---
 
@@ -116,7 +171,7 @@ def color_func(word, font_size, position, orientation, font_path, random_state=N
     opacity = st.session_state.opacity_map.get(word, 3)
 
     color_map = {
-        1: '#D9D9D6',
+        1: '#f0f0f0',
         2: '#E3ECF0',
         3: '#BED9E7',
         4: '#69A5C0',
@@ -151,6 +206,10 @@ with col[0]:
         ax.imshow(wc, interpolation="bilinear")
         ax.axis("off")
         st.pyplot(fig)
+
+
+
+
 
     
 
