@@ -9,7 +9,7 @@ import numpy as np
 
 st.set_page_config(
     page_title="Vad?",
-    page_icon="📈",
+    page_icon="🔵",
     layout="wide",
     initial_sidebar_state="expanded")
 
@@ -93,9 +93,7 @@ with col[1]:
     # Beskrivning
     with st.expander('Beskrivning', expanded=False):
         st.write('''
-            Detta verktyg är utvecklat av Urbanworks i syfte att understödja SKBs styrelse till ett evidenbaserat förhållningssätt i framtagandet av en ny markstrategi. Datan som ligger till grund för kartan du ser är hämtad från
-                 Traveltime, kommunernas markpolicys, SCB, Svensk Mäklarstatistik, Boverket och SKB. Vi på Urbanworks har utifrån detta dataunderlag poängsatt kommunerna i varje kategori. Verktyget kan användas för att visa hur olika 
-                 prioriteringar kan leda till att olika kommuner blir attraktiva för SKB att investera i.''')
+            Detta verktyg har utvecklats av Urbanworks för att stödja SKBs styrelse i att visualisera prioriteringar vid skapandet av en god boendemiljö. Ordens storlek i ordmolnet återspeglar hur högt varje faktor är prioriterad. Färgerna visar den relativa kostnaden för respektive faktor. Den genererade bilden är en visuell representation av förhållandet mellan olika prioriteringar och kostnader, och ska ses som ett stöd för förståelse och dialog, inte som en exakt avbildning av verkliga värden.''')
 
     st.write("")  
     st.write("")  
