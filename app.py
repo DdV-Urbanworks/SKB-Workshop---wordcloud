@@ -107,9 +107,9 @@ with col[1]:
 
         # Define your levels and colors
     colors = {
-        'Lågt': '#f0f0f0',
-        'Rimligt': '#E3ECF0',
-        'Dyrt': '#BED9E7',
+        'Lågt': '#BED9E7',
+        'Rimligt': '#BED9E7',
+        'Dyrt': '#69A5C0',
         'Väldigt dyrt': '#69A5C0',
         'Prisdrivande': '#004D73'
     }
@@ -210,4 +210,5 @@ with col[0]:
 
 
     
+
 
