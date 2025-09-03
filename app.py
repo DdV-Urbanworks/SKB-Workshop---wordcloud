@@ -170,7 +170,7 @@ def color_func(word, font_size, position, orientation, font_path, random_state=N
 
     color_map = {
         1: '#BED9E7',
-        2: '#BED9E7',
+        2: '#69A5C0',
         3: '#69A5C0',
         4: '#004D73',
         5: '#004D73'
@@ -210,6 +210,7 @@ with col[0]:
 
 
     
+
 
 
 
