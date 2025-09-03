@@ -1,21 +1,16 @@
 word,weight,color
-ventilation,3,2
-ljudisolering,3,4
-terrass,3,4
-balkong/uteplats,3,3
-trädgård,3,1
-luftiga entréer,3,5
-kvarterslokal,3,3
-lokal,3,2
-soprum,3,2
-stora ljusinsläpp,3,2
-bullerfritt,3,4
-laddbox,3,1
-garage,3,5
-kvartersstruktur,3,1
-låg täthet,3,5
-variation i upplåtelseformer,3,1
-bygga i trä,3,2
-kvalitet i material och utförande,3,5
-analyserad klimatrisk,3,1
-tydlig identitet,3,2
+Terrass,2,4
+Balkong/uteplats,4,3
+Luftiga entréer,3,5
+Gemensamhetslokal,3,3
+Aktiv bottenvåning,3,2
+Stora ljusinsläpp,3,2
+Bullerfritt,3,4
+Laddbox,3,1
+Garage,3,5
+Kvartersstruktur,4,1
+Variation av lgh storlekar,5,1
+Bygga i trä,1,2
+Kvalitet i material och utförande,4,5
+Analyserad klimatrisk,5,1
+Tydlig identitet,4,2
