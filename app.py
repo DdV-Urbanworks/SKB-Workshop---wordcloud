@@ -169,11 +169,11 @@ def color_func(word, font_size, position, orientation, font_path, random_state=N
     opacity = st.session_state.opacity_map.get(word, 3)
 
     color_map = {
-        1: '#BED9E7',
-        2: '#69A5C0',
-        3: '#69A5C0',
-        4: '#004D73',
-        5: '#004D73'
+        1: '#009f7f',
+        2: '#f26532',
+        3: '#f26532',
+        4: '#d1123e',
+        5: '#d1123e'
     }
 
     return color_map.get(opacity, '#D9D9D6')
@@ -210,6 +210,7 @@ with col[0]:
 
 
     
+
 
 
 
