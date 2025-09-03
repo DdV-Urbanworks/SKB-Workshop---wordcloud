@@ -107,11 +107,11 @@ with col[1]:
 
         # Define your levels and colors
     colors = {
-        'Lågt': '#BED9E7',
-        'Rimligt': '#BED9E7',
-        'Dyrt': '#69A5C0',
-        'Väldigt dyrt': '#69A5C0',
-        'Prisdrivande': '#004D73'
+        'Lågt': '#87c7b6',
+        'Rimligt': '#faae89',
+        'Dyrt': '#faae89',
+        'Väldigt dyrt': '#d1123e',
+        'Prisdrivande': '#d1123e'
     }
 
     # Create font properties
@@ -210,6 +210,7 @@ with col[0]:
 
 
     
+
 
 
 
